@@ -1,0 +1,22 @@
+footer{
+    background: #003366;
+}
+footer h6{
+    color: white;
+}
+
+.nav-link h6:hover{
+    text-decoration: underline white;
+}
+
+footer h3{
+    color: white;   
+}
+footer .title:hover{
+    text-decoration: none;
+}
+
+footer img{
+    height: 75%;
+    width: 75%;
+}

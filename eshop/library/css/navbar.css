@@ -1,0 +1,92 @@
+/* nav bar css*/
+.search-bar {
+  background: #003366;
+  
+}
+
+header input{
+  width: 100%;
+}
+/*for search box result css*/
+.search-result
+{
+  z-index: 1100;
+  position: absolute;
+  margin-top:-20px;
+  
+  /*
+  margin-left: 17%;
+  width:65.8%;
+  */
+}
+
+
+
+
+.search_form{
+ border:0px;
+}
+.fas
+{
+  background:white;
+}
+.search_form:focus{
+  outline: none ;
+  box-shadow: none;
+}
+.navbar .navBtn{
+  color: white;
+
+  background:skyblue;
+}
+
+.navBtn:focus{
+  outline: none ;
+  box-shadow: none;
+}
+.navBtn:hover{
+  background: #003366;
+}
+
+.languageBtn{
+  color: white;
+  
+  border: 2px solid skyblue;
+  background: skyblue;
+}
+.languageBtn:hover{
+  color:white;
+  background: #003366;
+}
+.languageBtn:focus{
+  
+  color:white;
+  outline: none ;
+  box-shadow: none;
+  border: 2px solid white;
+  
+}
+
+
+.active
+{
+color:white;
+}
+.active:focus
+{
+  color:white;
+  outline: none ;
+  box-shadow: none;
+  border: 2px solid white;
+}
+
+.mobile_nav_btn{
+  color:green;
+}
+.mobile_nav_btn:focus{
+  color:white;
+  outline: none ;
+  box-shadow: none;
+  border-bottom: 2px solid white;
+}
+
