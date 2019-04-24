@@ -6,14 +6,16 @@
 
     <!-- turn responsive on/off-->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-    <meta name="description" content="">
+    <meta name="description" content="Eshop of Hong Kong Arabcci Chamber">
 
-    <meta name="generator" content="Jekyll v3.8.5">
+
     <title>Shop index Sample</title>
 
     <!-- Jquery -->
     <script src="library/Jquery_331/jquery-3.3.1.slim.min.js">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
     <!-- Bootstrap core CSS -->
     <script src="library/popperjs/popper_1.14.7.min.js"></script>
 
@@ -32,9 +34,12 @@
     <link href="library/css/navbar.css" rel="stylesheet">
     <link href="library/css/dropdown.css" rel="stylesheet">
     <link href="library/css/footer.css" rel="stylesheet">
+    <link href="library/css/checkout.css" rel="stylesheet">
 
     <!-- Custom javascript for this template -->
+    <script src="library/js/shop_class.js"></script>
     <script src="library/js/shop_home.js"></script>
+    <script src="library/js/shop_jquery.js"></script>
 
 
 </head>

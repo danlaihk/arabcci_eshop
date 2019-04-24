@@ -79,57 +79,59 @@ function printResult($array)
         */
     }
 }
-//connect to shop db
-$conn= connectShopDB();
 
-$hintsArr=array();
-//product data array
-$pSQL= "SELECT productName FROM products";
+if (isset($_REQUEST["q"])) {
+    //connect to shop db
+    $conn= connectShopDB();
 
-$pArray=getSQLResult($pSQL);
+    $hintsArr=array();
+    //product data array
+    $pSQL= "SELECT productName FROM products";
 
-//product line data array
-$pLineSQL= "SELECT productLine FROM productlines";
+    $pArray=getSQLResult($pSQL);
 
-$pLineArr=getSQLResult($pLineSQL);
+    //product line data array
+    $pLineSQL= "SELECT productLine FROM productlines";
+
+    $pLineArr=getSQLResult($pLineSQL);
 
 
-//categories data array
-$catSQL= "SELECT categoriesName FROM categories";
+    //categories data array
+    $catSQL= "SELECT categoriesName FROM categories";
 
-$catArray=getSQLResult($catSQL);
+    $catArray=getSQLResult($catSQL);
 
-//vendor data array
-$vSQL="SELECT `vendorName` FROM `vendors` ";
+    //vendor data array
+    $vSQL="SELECT `vendorName` FROM `vendors` ";
 
-$vendorArray=getSQLResult($vSQL);
+    $vendorArray=getSQLResult($vSQL);
 
-//put all the sql results into the array
-array_push($hintsArr, inputData($pArray, 'productName'));
-array_push($hintsArr, inputData($pLineArr, 'productLine'));
-array_push($hintsArr, inputData($catArray, 'categoriesName'));
-array_push($hintsArr, inputData($vendorArray, 'vendorName'));
+    //put all the sql results into the array
+    array_push($hintsArr, inputData($pArray, 'productName'));
+    array_push($hintsArr, inputData($pLineArr, 'productLine'));
+    array_push($hintsArr, inputData($catArray, 'categoriesName'));
+    array_push($hintsArr, inputData($vendorArray, 'vendorName'));
 
-$conn->close();
-//above correct
+    $conn->close();
+    //above correct
 
-//array that carries results
-$resultArr= array();
+    //array that carries results
+    $resultArr= array();
 
-// get the q parameter from URL
+    // get the q parameter from URL
 
-$q = $_REQUEST["q"];
+    $q = $_REQUEST["q"];
 
-if ($q !== "") {
-    $q = strtolower($q);
-    $len=strlen($q);
-    for ($i=0;$i<count($hintsArr);$i++) {
-        foreach ($hintsArr[$i] as $result) {
-            ///check if the query is the same part as result
-            if (stristr($q, substr($result, 0, $len))) {
+    if ($q !== "") {
+        $q = strtolower($q);
+        $len=strlen($q);
+        for ($i=0;$i<count($hintsArr);$i++) {
+            foreach ($hintsArr[$i] as $result) {
+                ///check if the query is the same part as result
+                if (stristr($q, substr($result, 0, $len))) {
 
                 /// if result is product
-                switch ($i) {
+                    switch ($i) {
                     case 0:
                     array_push($resultArr, "Product: ".$result);
                         break;
@@ -148,39 +150,42 @@ if ($q !== "") {
 
                 }
 
-                /*
-                //if condition for printing selection
-                if ($i===0) {
-                    array_push($resultArr, "Product: ".$result);
-                }
-                if ($i===1) {
-                    array_push($resultArr, "Product Line: ".$result);
-                }
-                if ($i===2) {
-                    array_push($resultArr, "Categories: ".$result);
-                }
+                    /*
+                    //if condition for printing selection
+                    if ($i===0) {
+                        array_push($resultArr, "Product: ".$result);
+                    }
+                    if ($i===1) {
+                        array_push($resultArr, "Product Line: ".$result);
+                    }
+                    if ($i===2) {
+                        array_push($resultArr, "Categories: ".$result);
+                    }
 
-                if ($i===3) {
-                    array_push($resultArr, "Vendor: ".$result);
+                    if ($i===3) {
+                        array_push($resultArr, "Vendor: ".$result);
+                    }
+                    */
                 }
-                */
             }
         }
     }
-}
-/// return result as html format
-/*
-<div id="livesearch_result" class="search-result  bg-white text-dark pt-3">
-    <!-- return string @ here-->
-</div>
+    /// return result as html format
+    /*
+    <div id="livesearch_result" class="search-result  bg-white text-dark pt-3">
+        <!-- return string @ here-->
+    </div>
 
-*/
+    */
 
-if (count($resultArr)===0) {
-    echo '<p class="pr-3 pl-2 pt-3 resultRow">&nbsp;No Result</span>';
+    if (count($resultArr)===0) {
+        echo '<p class="pr-3 pl-2 pt-3 resultRow">&nbsp;No Result</span>';
+    } else {
+        printResult($resultArr);
+    }
+
+
+    //print_r($resultArr);
 } else {
-    printResult($resultArr);
+    echo '<p class="pr-3 pl-2 pt-3 resultRow">&nbsp;Please enter keywords</span>';
 }
-
-
-//print_r($resultArr);

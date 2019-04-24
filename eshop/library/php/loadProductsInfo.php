@@ -136,7 +136,7 @@ function printProductRow($arr, $col)
 
             //print prduct text
             echo '<div class="row px-1">
-              <div class="col-sm-12 bg-white pb-5">';
+              <div class="col-sm-12 bg-white pb-5 pt-3">';
 
               
 
@@ -216,7 +216,7 @@ function printShopProductsRow($arr, $col, $productCode)
                 </div>\n";
 
                 //print prduct text
-                echo '<div class="row px-1">
+                echo '<div class="row px-1 ">
               <div class="col-sm-12 bg-white pb-5">';
 
               
@@ -269,7 +269,37 @@ function printShopProductsRow($arr, $col, $productCode)
         echo 'Sorry, no such goods in stock.';
     }
 }
+function printProductAttributes($arr)
+{
+    echo "<select id='selectBox' class='custom-select' onchange=\"changeFunc('".$arr[0]['productCode']."')\">"."\n".
+  '<option  value="0">Please Select</option>'."\n";
 
+    $attArr=explode('|', $arr[0]['attributes']);
+
+    for ($i=0;$i<count($attArr);$i++) {
+        $index = $i+1;
+        $attStrArr = explode('-', $attArr[$i]);
+
+        echo '<option value="'.$index.'">';
+        echo '<span>';
+        echo $attStrArr[0];
+        echo '</span>';
+        
+       
+        echo '</option>';
+    }
+    /*
+    <option value="1">One</option>123
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+    */
+    echo '</select>';
+}
+function printProductStock($arr)
+{
+    $stockStr = 'Stock :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$arr[0]['quantityInStock'];
+    echo $stockStr;
+}
 function printShopRow($arr)
 {
     /// print product rows in shop index
@@ -294,8 +324,8 @@ function printShopRow($arr)
       </div>\n";
 
         //print prduct text
-        echo '<div class="row px-1 pt-3">
-              <div class="col-sm-12 bg-white pb-5 pt-2">';
+        echo '<div class="row px-1 ">
+              <div class="col-sm-12 bg-white pb-5 pt-3">';
 
               
 
@@ -323,7 +353,7 @@ function printShopRow($arr)
       
 
         ///print ajax queries to product's details
-        echo "<a href='#' class='btn btm-sm btn-primary float-right' onclick=\"loadDoc('layouts/vendorDetails.html?vendor=".$arr[$row]['vendorCode']."',loadContent,'main')\">
+        echo "<a href='#' class='btn btm-sm btn-primary float-right' onclick=\"loadDoc('layouts/vendorDetails.php?vendor=".$arr[$row]['vendorCode']."',loadContent,'main')\">
       View More</a>";
 
         echo '</p>

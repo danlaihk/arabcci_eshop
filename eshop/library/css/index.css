@@ -165,8 +165,16 @@ body{
 }
 
 /*product details content*/
+.shop-pathP
+{
+    z-index: 0;
+}
 .social-media-link:hover
 {
     text-decoration: none;
 }
 
+option .right
+{
+    text-align: right;
+}
