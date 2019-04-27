@@ -4,6 +4,7 @@ namespace arabcci_chamber_key;
 
 class encryptionInfo
 {
+    //properties
     private $_keyLength;
     private $_arabcci_key;
     private $_cipher;

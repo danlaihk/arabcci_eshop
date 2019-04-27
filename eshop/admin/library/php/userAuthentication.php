@@ -1,29 +1,71 @@
 <?php
 
-include_once("encryption.php");
-use arabcci_chamber_key\encryptionInfo;
+include_once("arabcci_login.php");
+
+use Arabcci_Chamber_Login\LoginInfo;
+use Arabcci_Chamber_Login\AdminCheck_DBInfo;
+use Arabcci_Chamber_Login\VerifyHashSession;
+
+//use Arabcci_Chamber_Login\HashInfo;
+//use Arabcci_Chamber_Login\AdminCheck_DBInfo;
 
 //handle null query
 
-if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false) {
+//get http request header
+
+
+if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||isset($_SERVER['HTTP_REFERER'])==false||isset($_REQUEST['token'])==false) {
+    echo 'wrong http query';
     exit();
 } else {
     //run coding
+   
+    //declare login info object
+    $loginInfo=new LoginInfo($_REQUEST['userName'], $_REQUEST['password'], $_SERVER['HTTP_REFERER'], $_REQUEST['token']);
+
+    //checking call type
+    
+    if ($loginInfo->checkCallType()==false) {
+        exit();
+    }
 
     //checking source url
-   
+    //bug
+    //echo $_SERVER['HTTP_REFERER'];
+    
+    if ($loginInfo->checkHTTP_Referer()==false) {
+        exit();
+    }
     
     
+    $loginInfo->tokenCheck();
+    //checking token
 
-    $encryptionInfo=new encryptionInfo($_REQUEST['userName'], $_REQUEST['password'], $_SERVER['HTTP_REFERER']);
 
+    /********************************************************************* */
+    #
+    #test account:admin root, need to delete this comment before deployment
+    #
+    /********************************************************************* */
     
-    //encription username and password
-
-    //debug echo encrypted
-    //search the record of encrypted user
+    //search the record of user
     //select *blablabla
-
+    $sql="SELECT password FROM authentication WHERE userName= '".$loginInfo->getEnterUserName()."'";
+    $connObj=new AdminCheck_DBInfo($sql);
+    $result=$connObj->queryUserDB_PDO();
+    if (count($result)>0) {
+        $password=$result[0]['password'];// only one result show be shown
+    } else {
+        echo 'sorry, no records';
+    }
+    $hashVerify = new VerifyHashSession($password, $_REQUEST['password']);
+    if ($hashVerify->verifyHash()===true) {
+        echo 'login';
+    } else {
+        echo 'wrong password';
+    }
+    
+    
     //get result
     //debug echo record after decrypted
 
@@ -33,14 +75,11 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false) {
 
     //if pass then redirect to CMS page
 }
+
 ?>
+<div>
 
-<div class="row">
-    <div class="col-12">
-        <?php
-    //$encryptionInfo->testEcho();
-    echo $_SERVER['HTTP_REFERER'];
+    <?php
+    echo 'ok';
     ?>
-    </div>
-
 </div>
