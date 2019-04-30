@@ -5,6 +5,7 @@ include_once("arabcci_login.php");
 use Arabcci_Chamber_Login\LoginInfo;
 use Arabcci_Chamber_Login\AdminCheck_DBInfo;
 use Arabcci_Chamber_Login\VerifyHashSession;
+use Arabcci_Chamber_Login\EncryptionSession;
 
 //use Arabcci_Chamber_Login\HashInfo;
 //use Arabcci_Chamber_Login\AdminCheck_DBInfo;
@@ -18,6 +19,7 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||i
     echo 'wrong http query';
     exit();
 } else {
+    
     //run coding
    
     //declare login info object
@@ -28,17 +30,18 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||i
     if ($loginInfo->checkCallType()==false) {
         exit();
     }
-
+    
     //checking source url
     //bug
-    //echo $_SERVER['HTTP_REFERER'];
-    
+
+
     if ($loginInfo->checkHTTP_Referer()==false) {
         exit();
     }
-    
+
     
     $loginInfo->tokenCheck();
+    
     //checking token
 
 
@@ -50,36 +53,32 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||i
     
     //search the record of user
     //select *blablabla
-    $sql="SELECT password FROM authentication WHERE userName= '".$loginInfo->getEnterUserName()."'";
-    $connObj=new AdminCheck_DBInfo($sql);
-    $result=$connObj->queryUserDB_PDO();
+    
+    //create connection object
+    $connInfo=new AdminCheck_DBInfo($_REQUEST['userName']);
+    //get info
+    $result=$connInfo->queryUserDB_PDO();
+
     if (count($result)>0) {
+        //get result
+        //debug echo record after decrypted
         $password=$result[0]['password'];// only one result show be shown
     } else {
-        echo 'sorry, no records';
+        //if result=0 handle error
+        echo json_encode(false);
+        die();
     }
     $hashVerify = new VerifyHashSession($password, $_REQUEST['password']);
-    if ($hashVerify->verifyHash()===true) {
-        echo 'login';
+
+    //check the password
+    if ($hashVerify->verifyHash()===false) {
+        echo json_encode(false);
     } else {
-        echo 'wrong password';
+        $encryptSession = new EncryptionSession();
+        $encryptInfo =$encryptSession->getEncryptedInfo();
+        
+        //echo json_encode($encryptInfo);
+        //if pass then redirect to CMS page
+        include_once('../../layouts/cPanel.php');
     }
-    
-    
-    //get result
-    //debug echo record after decrypted
-
-    //if result=0 handle error
-
-    //else check password and wrong login count and last trial time
-
-    //if pass then redirect to CMS page
 }
-
-?>
-<div>
-
-    <?php
-    echo 'ok';
-    ?>
-</div>

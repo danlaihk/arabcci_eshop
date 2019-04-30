@@ -15,3 +15,6 @@ function connectShopDB()
         return $conn;
     }
 }
+function pdoShopDB()
+{
+}

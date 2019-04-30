@@ -7,33 +7,38 @@ use PDO;
 class AdminCheck_DBInfo
 {
     private $_servername = "localhost";
-    private $_username = "adminUserCheck";
-    private $_password = "5L6ZlQuZSH3IIMkH";
+    private $_dbUsername = "userCheck";
+    private $_password = "tUNeskkqapN55Bg3";
     private $_dbname = "admin_user_login";
-    private $_sql;
+    private $_clientUserName;
    
-    public function __construct($sql)
+    public function __construct($clientUserName)
     {
-        $this->_sql=$sql;
+        $this->_clientUserName=$clientUserName;
     }
     
     public function queryUserDB_PDO()
     {
         $servername = $this->_servername;
         $dbname   = $this->_dbname;
-        $username = $this->_username;
+        $dbUserName = $this->_dbUsername;
         $password = $this->_password;
 
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbUserName, $password);
+            $sql ="SELECT * FROM `authentication` WHERE userName=?";
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
             //echo "Connected successfully";
-            $stmt = $conn->prepare($this->_sql);
-            $stmt->execute();
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$this->_clientUserName]);
 
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            //close connection
+            $conn=null;
+            //return result array
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -50,38 +55,6 @@ class AdminCheck_DBInfo
         } else {
             echo 'sorry not record';
         }
-    }
-    
-    //mysql method
-    private function connectShopDB()
-    {
-        // Create connection
-        $conn = new mysqli($this->_servername, $this->_username, $this->_password, $this->_dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } else {
-            return $conn;
-        }
-    }
-    public function getAuthenticationResult()
-    {
-        $conn= $this->connectShopDB();
-        $sqlResultArr= array();
-
-        $result=$conn->query($this->_sql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                array_push($sqlResultArr, $row);
-            }
-           
-            /////else return a empty array
-        }
-
-        $conn->close();
-        return $sqlResultArr;
     }
 }
 class LoginInfo
@@ -109,7 +82,7 @@ class LoginInfo
         $this->_token=$token;
 
         //permited sourceURL
-        $this->_sourceURL='http://localhost/eshop/admin/CMSlogin.php';
+        $this->_sourceURL="http://localhost/eshop/admin/CMSlogin.php";
     }
     public function getEnterUserName()
     {
@@ -161,9 +134,8 @@ class EncryptionSession
     private $_iv;
 
     //user info
-    private $_userName;
-    private $_password;
-    public function __construct($userName, $password)
+
+    public function __construct()
     {
         //encritption method parameter
         $this->_keyLength=16;
@@ -184,6 +156,12 @@ class EncryptionSession
         $decryptedInfo = openssl_decrypt($encryptedInfo, $this->_cipher, $this->_arabcci_key, 0, $this->_iv);
         return $decryptedInfo;
     }
+    public function getEncryptedInfo()
+    {
+        $info="password correct";
+        $encryptInfo=$this->encryptedInfo($info);
+        return $encryptInfo;
+    }
 }
 //hashing class
 class HashSession
@@ -196,7 +174,8 @@ class HashSession
     }
     private function hashingText()
     {
-        $this->_hashText = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
+        $plaintext=$this->_plainText;
+        $this->_hashText = password_hash($plaintext, PASSWORD_DEFAULT);
     }
     public function getHashText()
     {
