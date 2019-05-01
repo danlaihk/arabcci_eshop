@@ -97,60 +97,7 @@ function addCart() {
 }
 
 //post request to shop_checkout.php
-function ShowCartListDetails() {
-    //declare a array to store item objects
-    let cart_itemArr = [];
 
-    //event handler of cart list show details btn
-    //count the number of row
-    let table_row = $('.cart-list-table tbody tr').length;
-    //count the number of column
-    let table_column = $('.cart-list-table tbody tr td').length;
-
-    //declare varibles 
-    let i;
-    let name;
-    let attribute;
-    let quantity;
-    let price;
-
-    for (i = 0; i < table_row; i++) {
-
-        //get table data first
-
-        name = $('.cart-list-table tbody tr td').eq(0).text();
-        attribute = $('.cart-list-table tbody tr td').eq(1).text();
-        quantity = $('.cart-list-table tbody tr td').eq(2).text();
-        price = $('.cart-list-table tbody tr td').eq(3).text();
-        //let item = new cart_item(pName, selectedAttValue, selectedQuantityValue, pSalePrice);
-        //declare a cart item objec
-        let item = new cart_item(name, attribute, quantity, price);
-        cart_itemArr.push(item);
-
-    }
-    // declare a cart list object
-    let list = new shopCart_list(cart_itemArr);
-    // json encode the object
-    listSTr = JSON.stringify(list);
-
-    //ajax pass querires 
-
-    //loadDoc('layouts/shop_checkout.php?list=' + listSTr, loadContent, 'main')
-    let response = "";
-    $.ajax({
-        type: 'POST',
-
-        url: 'layouts/shop_checkout.php?',
-        data: { list: listSTr }, //query '?list='+listStr
-
-        success: function (data) {
-            //echo what the server sent back...
-            $("main").html(data);
-        }
-
-
-    });
-}
 function makeid(length) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

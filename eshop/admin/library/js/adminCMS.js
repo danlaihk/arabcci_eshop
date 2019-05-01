@@ -8,7 +8,7 @@ function loadDocSetting() {
         let user = new adminUser(userName, password)
         e.preventDefault();
         //debug
-        user.login();
+        user.authenticateUser();
 
         //send ajax query 
 

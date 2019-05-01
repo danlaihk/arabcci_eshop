@@ -1,7 +1,9 @@
 <?php
 include_once('../library/php/eShopClass.php');
+
 use arabcci_chamber_eshop\vendor;
 use arabcci_chamber_eshop\product;
+use function arabcci_chamber_eshop\queryShopDB_PDO;
 
 ////// used the relative path from categoriesList.php to loadProductsInfo.php
 
@@ -211,12 +213,12 @@ use arabcci_chamber_eshop\product;
                     <div class="col-md-12">
                         <h5>
                             <?php
-                            $sql = "SELECT * FROM `products` WHERE `vendorName`='".$name."'";
+                            $sql = "SELECT * FROM `products` WHERE `vendorName`=?";
                                             
-                            $shopProductArr=getSQLResult($sql);
+                            $shopProductArr=queryShopDB_PDO($sql, $vendor->getVenName());
                             
                             if (count($shopProductArr)>=1) {
-                                echo $name.' products';
+                                echo $vendor->getVenName().' products';
                             }
                                 
                             ?>

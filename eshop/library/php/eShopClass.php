@@ -2,8 +2,92 @@
 
 namespace arabcci_chamber_eshop;
 
-include_once('loadProductsInfo.php');
-   
+use mysqli;
+use PDO;
+
+//include_once('loadProductsInfo.php');
+//mysql method
+function connectShopDB()
+{
+    $servername = "localhost";
+    $username = "shop";
+    $password = "hYCIkdc2RDghvxAH";
+    $dbname = "arabcci_shop";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } else {
+        return $conn;
+    }
+}
+function getSQLResult($sql)
+{
+    $conn= connectShopDB(); //included in loadHeader.php
+    $infoArr= array();
+
+    
+
+    $result=$conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            array_push($infoArr, $row);
+        }
+           
+        /////else return a empty array
+    }
+
+    $conn->close();
+    return $infoArr;
+}
+
+//PDO method
+function queryShopDB_PDO($sql, $value)
+{
+    $servername =  "localhost";
+    $dbname   = "arabcci_shop";
+    $dbUserName = "shop";
+    $password = "hYCIkdc2RDghvxAH";
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbUserName, $password);
+        
+
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+        //echo "Connected successfully";
+        $stmt = $conn->prepare($sql);
+        if ($value==null) {
+            // if no parameterized value
+            $stmt->execute();
+        } elseif (is_array($value)) {
+            //for IN query and parameterized array value
+            $stmt->execute($value);
+        } else {
+            //for parameterized value
+            $stmt->execute([$value]);
+        }
+        
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        //close connection
+        $conn=null;
+        //return result array
+        return $result;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+
+
+
+
+//eshop classes
 class vendor
 {
     public $venCode;
@@ -15,8 +99,8 @@ class vendor
 
     public function __construct($code)
     {
-        $sql = "SELECT * FROM `vendors` WHERE vendorCode='".$code."'";
-        $vendorInfoArr=getSQLResult($sql);
+        $sql = "SELECT * FROM `vendors` WHERE vendorCode=?";
+        $vendorInfoArr=queryShopDB_PDO($sql, $code);
 
         $this->venCode=$vendorInfoArr[0]['vendorCode'];
         $this->venName=$vendorInfoArr[0]['vendorName'];
@@ -60,8 +144,9 @@ class productLine
 
     public function __construct($pLine)
     {
-        $sql = "SELECT * FROM `productlines` WHERE productline='".$pLine."'";
-        $pLineInfoArr=getSQLResult($sql);
+        $sql = "SELECT * FROM `productlines` WHERE productline=?";
+        $pLineInfoArr=queryShopDB_PDO($sql, $pLine);
+        
         $this->pLineName=$pLineInfoArr[0]['productLine'];
         $this->pLineDescript=$pLineInfoArr[0]['textDescription'];
         $this->pLineHtml=$pLineInfoArr[0]['htmlDescription'];
@@ -96,8 +181,8 @@ class categories extends productLine
 
     public function __construct($catName)
     {
-        $sql = "SELECT * FROM categories WHERE categoriesName='".$catName."'";
-        $catInfoArr=getSQLResult($sql);
+        $sql = "SELECT * FROM categories WHERE categoriesName=?";
+        $catInfoArr=queryShopDB_PDO($sql, $catName);
 
         $this->catName=$catInfoArr[0]['categoriesName'];
         $this->catPLine=$catInfoArr[0]['productLine'];
@@ -145,8 +230,8 @@ class product
 
     public function __construct($code)
     {
-        $sql = "SELECT * FROM `products` WHERE productCode='".$code."'";
-        $pInfoArr=getSQLResult($sql);
+        $sql = "SELECT * FROM `products` WHERE productCode=?";
+        $pInfoArr=queryShopDB_PDO($sql, $code);
 
         $this->pCode= $pInfoArr[0]['productCode'];
         $this->pName=$pInfoArr[0]['productName'];

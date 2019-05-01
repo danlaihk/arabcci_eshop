@@ -1,12 +1,15 @@
 <?php
-include_once('loadProductsInfo.php');
+//include_once('loadProductsInfo.php');
+include_once('eShopClass.php');
+use function arabcci_chamber_eshop\queryShopDB_PDO;
 
 function inputData($dataSourceArr, $colName)
 {
     $array=array();
     if ($colName==='productName') {
         $sql = "SELECT productName,productCode FROM products";
-        $infoArr=getSQLResult($sql);
+        //$infoArr=getSQLResult($sql);
+        $infoArr= queryShopDB_PDO($sql, null);
 
         for ($i=0;$i<count($dataSourceArr);$i++) {
             array_push($array, $infoArr[$i]['productCode'].'-'.$dataSourceArr[$i][$colName]);
@@ -82,29 +85,29 @@ function printResult($array)
 
 if (isset($_REQUEST["q"])) {
     //connect to shop db
-    $conn= connectShopDB();
+    //$conn= connectShopDB();
 
     $hintsArr=array();
     //product data array
     $pSQL= "SELECT productName FROM products";
 
-    $pArray=getSQLResult($pSQL);
+    $pArray=queryShopDB_PDO($pSQL, null);
 
     //product line data array
     $pLineSQL= "SELECT productLine FROM productlines";
 
-    $pLineArr=getSQLResult($pLineSQL);
+    $pLineArr=queryShopDB_PDO($pLineSQL, null);
 
 
     //categories data array
     $catSQL= "SELECT categoriesName FROM categories";
 
-    $catArray=getSQLResult($catSQL);
+    $catArray=queryShopDB_PDO($catSQL, null);
 
     //vendor data array
-    $vSQL="SELECT `vendorName` FROM `vendors` ";
+    $vSQL="SELECT vendorName FROM vendors ";
 
-    $vendorArray=getSQLResult($vSQL);
+    $vendorArray=queryShopDB_PDO($vSQL, null);
 
     //put all the sql results into the array
     array_push($hintsArr, inputData($pArray, 'productName'));
@@ -112,7 +115,7 @@ if (isset($_REQUEST["q"])) {
     array_push($hintsArr, inputData($catArray, 'categoriesName'));
     array_push($hintsArr, inputData($vendorArray, 'vendorName'));
 
-    $conn->close();
+    //$conn->close();
     //above correct
 
     //array that carries results
@@ -148,24 +151,7 @@ if (isset($_REQUEST["q"])) {
                     array_push($resultArr, "Vendor: ".$result);
                         break;
 
-                }
-
-                    /*
-                    //if condition for printing selection
-                    if ($i===0) {
-                        array_push($resultArr, "Product: ".$result);
                     }
-                    if ($i===1) {
-                        array_push($resultArr, "Product Line: ".$result);
-                    }
-                    if ($i===2) {
-                        array_push($resultArr, "Categories: ".$result);
-                    }
-
-                    if ($i===3) {
-                        array_push($resultArr, "Vendor: ".$result);
-                    }
-                    */
                 }
             }
         }

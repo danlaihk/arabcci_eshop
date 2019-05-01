@@ -1,6 +1,9 @@
 <!-- nav bar-->
 <?php
     include('library/php/loadHeader.php');
+    include_once('library/php/eShopClass.php');
+    
+
     $pLineArr = getProductLineInfo();
 
     ?>

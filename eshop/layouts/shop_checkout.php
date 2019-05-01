@@ -1,6 +1,8 @@
 <?php
     include_once('../library/php/eShopClass.php');
+
     use arabcci_chamber_eshop\product;
+    use function arabcci_chamber_eshop\queryShopDB_PDO;
 
     if (isset($_REQUEST['list'])) {
         $listArr=json_decode($_REQUEST['list']);
@@ -33,8 +35,8 @@
                             if (count($listArr)>0) {
                                 $totalPrice=0;
                                 foreach ($listArr as $item) {
-                                    $sql= "SELECT productCode FROM products WHERE productName ='".$item->{'_name'}."'";
-                                    $resultArr= getSQLResult($sql);
+                                    $sql= "SELECT productCode FROM products WHERE productName = ?";
+                                    $resultArr= queryShopDB_PDO($sql, $item->{'_name'});
                                     $product = new product($resultArr[0]['productCode']);
                                     $totalPrice += floatval($item->{'_subTotal'});
                                     //print_r($listArr[0]->{'_name'});
@@ -45,7 +47,7 @@
                                     echo '<small class="text-muted">'.$item->{'_attribute'}.'</small><br/>'."\n";
                                     echo '<small class="text-muted">Quantity: '.$item->{'_quantity'}.'</small><br/>'."\n";
                                     echo '</div>'."\n";
-                                    echo '<div>'."\n";
+                                    echo '<div class="text-right">'."\n";
                                     echo '<h6 class="my-0">Sub Total</h6>'."\n";
                                     echo '<span class="text-muted">'.$item->{'_subTotal'}.'</span>'."\n";
                                     echo '</div>'."\n";

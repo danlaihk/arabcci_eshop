@@ -196,7 +196,7 @@ class shopCart_list {
         //loadDoc('layouts/shop_checkout.php?list=' + listSTr, loadContent, 'main')
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             //url: 'layouts/shop_checkout.php?list=' + listSTr,
             url: 'layouts/shop_checkout.php',
             data: {
@@ -206,8 +206,8 @@ class shopCart_list {
 
             success: function (data) {
                 //echo what the server sent back...
-                // $("main").html(data);
-                alert(data);
+                $("main").html(data);
+                //alert(data);
             }
 
 
@@ -239,7 +239,7 @@ class cart_item {
         let nameEle = "<td class='text-center'>" + this._name + "</td>";
         let attEle = "<td class='text-center'>" + this._attribute + "</td>";
         let quantityEle = "<td class='text-center'>" + this._quantity + "</td>";
-        let subTotalEle = "<td class='text-center'>" + this._quantity + "</td>";
+        let subTotalEle = "<td class='text-center'>" + this._subTotal + "</td>";
         let deleteBtn = "<td class='text-center'><a href='#' class='delItemBtn' onclick='delItem(this)'><i class='fas fa-trash-alt'></i></a></td>";
         container.innerHTML = innerEle + "<tr>" + nameEle + attEle + quantityEle + subTotalEle + deleteBtn + "</tr>";
         //container.innerHTML = innerEle + "<div class='row'><div class='col-12'>" + "" + this._name + "</div></div>";

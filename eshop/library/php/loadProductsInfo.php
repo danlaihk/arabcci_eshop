@@ -1,5 +1,7 @@
 <?php
 include_once('connectShopDB.php');
+use function arabcci_chamber_eshop\queryShopDB_PDO;
+
 function getSQLResult($sql)
 {
     $conn= connectShopDB(); //included in loadHeader.php
@@ -24,51 +26,32 @@ function getSQLResult($sql)
 
 function getTrendingDealsInfo()
 {
-    $conn= connectShopDB(); //included in loadHeader.php
-    $infoArr= array();
-
     $sql = "SELECT * FROM `products` ORDER BY `discount(%)` ASC LIMIT 4";
-
-    $result=$conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            array_push($infoArr, $row);
-        }
+    $infoArr=queryShopDB_PDO($sql, null);
+    if (count($infoArr)>0) {
+        return $infoArr;
     } else {
         echo '0 results';
     }
-
-    $conn->close();
-    return $infoArr;
 }
 
 function getBestActivities()
 {
-    $conn= connectShopDB(); //included in loadHeader.php
-    $infoArr= array();
-
-    $sql = "SELECT * FROM products WHERE categoriesName = 'Competitions' OR categoriesName = 'Events' OR categoriesName = 'Fairs' OR categoriesName = 'Galas' OR categoriesName = 'Seminars' OR 
-    categoriesName = 'Ticketing' ORDER BY `hitrate` DESC LIMIT 4";
-
-    $result=$conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            array_push($infoArr, $row);
-        }
+    $catArr=['Competitions','Events','Fairs','Galas','Seminars','Ticketing'];
+    $cat  = str_repeat('?,', count($catArr) - 1) . '?';
+    $sql = "SELECT * FROM products WHERE categoriesName IN ($cat)";
+    
+    $infoArr=queryShopDB_PDO($sql, $catArr);
+    if (count($infoArr)>0) {
+        return $infoArr;
     } else {
         echo '0 results';
     }
-
-    $conn->close();
-    return $infoArr;
 }
 
 function getBestFoods()
 {
+    /*
     $conn= connectShopDB(); //included in loadHeader.php
     $infoArr= array();
 
@@ -87,10 +70,16 @@ function getBestFoods()
 
     $conn->close();
     return $infoArr;
+    */
+    
+    $sql = "SELECT * FROM products WHERE categoriesName = ? ORDER BY `hitrate` DESC LIMIT 4";
+    $infoArr=queryShopDB_PDO($sql, 'Hypermarket');
+    return $infoArr;
 }
 
 function getBestShops()
 {
+    /*
     $conn= connectShopDB(); //included in loadHeader.php
     $infoArr= array();
 
@@ -108,6 +97,9 @@ function getBestShops()
     }
 
     $conn->close();
+    */
+    $sql = "SELECT * FROM `vendors` ORDER BY hitrate DESC LIMIT 4";
+    $infoArr=queryShopDB_PDO($sql, null);
     return $infoArr;
 }
 function printProductRow($arr, $col)

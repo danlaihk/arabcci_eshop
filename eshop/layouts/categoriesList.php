@@ -2,11 +2,16 @@
     ////// used the relative path from categoriesList.php to loadProductsInfo.php
     include_once('../library/php/loadProductsInfo.php');
 
+    include_once('../library/php/eShopClass.php');
+    
+    use function arabcci_chamber_eshop\queryShopDB_PDO;
+    use arabcci_chamber_eshop\productLine;
+    use arabcci_chamber_eshop\categories;
+
     ////get ajax queries value
     $cat = $_REQUEST["cat"];
      /////echo $cat;
-     
-    
+    $categories= new categories($cat);
 ?>
 
 <div class="row justify-content-center">
@@ -17,13 +22,14 @@
                 <?php
 
                     /// get product line of the query
-                    $sql = "SELECT productLine FROM `categories` WHERE `categoriesName`= '".$cat."'";
-                    $productLine = getSQLResult($sql);
+                    $sql = "SELECT productLine FROM `categories` WHERE `categoriesName`= ?";
+                    $productLineArr = queryShopDB_PDO($sql, $cat);
                
                
                     /////debug line
                     ////print_r($productLine);
-                    echo $productLine[0]['productLine'];
+                    $productLine=new productLine($productLineArr[0]['productLine']);
+                    echo $productLine->getPLineName();
 
                 ?>
             </span>
@@ -34,9 +40,9 @@
                 <i class="fas fa-angle-double-right bg-transparent"></i>
                 <?php
                     
-                    echo "<a href='#' onclick=\"loadDoc('layouts/productLine.php?pLine=".$productLine[0]['productLine']."', loadContent,'main')\">";
+                    echo "<a href='#' onclick=\"loadDoc('layouts/productLine.php?pLine=".$productLine->getPLineName()."', loadContent,'main')\">";
                   
-                    echo $productLine[0]['productLine'];
+                    echo $productLine->getPLineName();
 
                     echo "</a>";
 
@@ -69,8 +75,8 @@
 
                         <?php
                             ////print categories of specific product line
-                            $sql = "SELECT categoriesName FROM `categories` WHERE `productLine`= '".$productLine[0]['productLine']."'";
-                            $catArr = getSQLResult($sql);
+                            $sql = "SELECT categoriesName FROM `categories` WHERE `productLine`= ?";
+                            $catArr = queryShopDB_PDO($sql, $productLine->getPLineName());
 
                   
                             printCatSideMenu($catArr);
@@ -107,12 +113,12 @@
 
            
            
-            $sql = "SELECT * FROM products WHERE categoriesName = '".$cat."' ORDER BY `hitrate` DESC ";
+            $sql = "SELECT * FROM products WHERE categoriesName = ? ORDER BY `hitrate` DESC ";
 
             ////debug line
             /////print_r(getSQLResult($sql));
 
-            $pInfoArr = getSQLResult($sql);
+            $pInfoArr = queryShopDB_PDO($sql, $cat);
             printProductRow($pInfoArr, 3);
 
             ?>
