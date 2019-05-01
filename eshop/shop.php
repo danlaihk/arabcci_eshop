@@ -59,7 +59,7 @@
            $fBannerInfoArr= getBannerFeaturedInfo();
    
         ?>
-        <div class="container-fluid fade-in3">
+        <div class="container-fluid fade-in12">
             <!--banner slider -->
 
             <div class="row justify-content-center mt-5">

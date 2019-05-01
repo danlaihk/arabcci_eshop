@@ -1,8 +1,10 @@
 <?php
-include('library/php/connectShopDB.php');
+//include('library/php/connectShopDB.php');
+use function arabcci_chamber_eshop\queryShopDB_PDO;
 
 function getProductLineInfo()
 {
+    /*
     $conn = connectShopDB();
 
     $pLineArr = array();
@@ -20,9 +22,16 @@ function getProductLineInfo()
     }
     $conn->close();
     return $pLineArr;
+    */
+
+    //pdo method
+    $sql = "SELECT * FROM productlines";
+    $pLineArr=queryShopDB_PDO($sql, null);
+    return $pLineArr;
 }
 function getCategoriesInfo($cat)
 {
+    /*
     $conn= connectShopDB();
 
     $catArr = array();
@@ -39,5 +48,10 @@ function getCategoriesInfo($cat)
         echo "0 results";
     }
     $conn->close();
+    return $catArr;
+    */
+    $sql ="SELECT * FROM categories WHERE productLine=?";
+    $catArr=queryShopDB_PDO($sql, $cat);
+    
     return $catArr;
 }

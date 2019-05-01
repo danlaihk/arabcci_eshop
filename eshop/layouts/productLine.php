@@ -1,5 +1,8 @@
 <?php
-    ////// used the relative path from categoriesList.php to loadProductsInfo.php
+include_once('../library/php/eShopClass.php');
+use function arabcci_chamber_eshop\queryShopDB_PDO;
+
+////// used the relative path from categoriesList.php to loadProductsInfo.php
     include_once('../library/php/loadProductsInfo.php');
 
     ////get ajax queries value
@@ -61,8 +64,8 @@
 
                         <?php
                             ////print categories of specific product line
-                            $sql = "SELECT categoriesName FROM `categories` WHERE `productLine`= '".$pLine."'";
-                            $catArr = getSQLResult($sql);
+                            $sql = "SELECT categoriesName FROM categories WHERE productLine= ?";
+                            $catArr = queryShopDB_PDO($sql, $pLine);
 
                   
                             printCatSideMenu($catArr);
@@ -97,24 +100,23 @@
 
             <?php
             
-            //////make the sql string first
-            $sql = "";
-            for ($record=0;$record<count($catArr);$record++) {
-                if ($record==0) {
-                    $sql =$sql."categoriesName = '".$catArr[$record]['categoriesName']."' " ;
-                } else {
-                    $sql =$sql."OR categoriesName = '".$catArr[$record]['categoriesName']."' " ;
-                }
+
+            //change 2d query result into 1d array;
+            $catInArr=array();
+            for ($i=0;$i<count($catArr);$i++) {
+                array_push($catInArr, $catArr[$i]['categoriesName']);
             }
-
-           
-            $sql = "SELECT * FROM products WHERE ".$sql." ORDER BY `hitrate`";
-
-            ////debug line
-            /////print_r(getSQLResult($sql));
-
-            $pInfoArr = getSQLResult($sql);
-            printProductRow($pInfoArr, 3);
+            
+            $cat  = str_repeat('?,', count($catArr) - 1) . '?';
+            $sql = "SELECT * FROM products WHERE categoriesName IN ($cat)";
+            
+            $pInfoArr=queryShopDB_PDO($sql, $catInArr);
+            if (count($pInfoArr)>0) {
+                printProductRow($pInfoArr, 3);
+            } else {
+                echo 'Sorry, no such goods in stock.';
+            }
+            //printProductRow($pInfoArr, 3);
 
             ?>
 

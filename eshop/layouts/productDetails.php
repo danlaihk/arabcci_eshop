@@ -9,6 +9,7 @@
     use arabcci_chamber_eshop\product;
     use arabcci_chamber_eshop\categories;
     use arabcci_chamber_eshop\productLine;
+    use function arabcci_chamber_eshop\queryShopDB_PDO;
 
     ////get ajax queries value
     $pID = $_REQUEST["product"];
@@ -18,8 +19,8 @@
     $categories= new categories($product->getPCat());
     $productLine =new productLine($categories->getCatPLine());
 
-    $sql = "SELECT `vendorCode` FROM `vendors` WHERE `vendorName` = '".$product->getPVendor()."'";
-    $resultArr= getSQLResult($sql);
+    $sql = "SELECT `vendorCode` FROM `vendors` WHERE `vendorName` = ?";
+    $resultArr= queryShopDB_PDO($sql, $product->getPVendor());
     
     $vendor= new vendor($resultArr[0]['vendorCode']);
 
@@ -285,9 +286,9 @@
                     <div class="col-md-12">
                         <h5>
                             <?php
-                            $sql = "SELECT * FROM `products` WHERE `vendorName`='".$product->getPVendor()."'";
+                            $sql = "SELECT * FROM products WHERE vendorName = ?";
                                             
-                            $shopProductArr=getSQLResult($sql);
+                            $shopProductArr=queryShopDB_PDO($sql, $product->getPVendor());
                             
                             if (count($shopProductArr)>=2) {
                                 echo 'More '.$product->getPVendor().' products';
@@ -311,9 +312,9 @@
                     <div class="col-md-12">
                         <?php
                         //print product with same category
-                            $sql = "SELECT * FROM `products` WHERE `categoriesName`='".$product->getPCat()."'";
+                            $sql = "SELECT * FROM products WHERE categoriesName = ?";
                     
-                            $shopProductArr=getSQLResult($sql);
+                            $shopProductArr=queryShopDB_PDO($sql, $product->getPCat());
                             if (count($shopProductArr)>=2) {
                                 echo '<h5>You may also interest in...</h5>';
                             }

@@ -1,44 +1,20 @@
 <?php
+use function arabcci_chamber_eshop\queryShopDB_PDO;
+
 function getBannerFeaturedInfo()
 {
-    $conn= connectShopDB(); //included in loadHeader.php
-    $fInfoArr= array();
-
-    $sql = "SELECT * FROM `featuredinfo` WHERE `attribute`= 'banner'";
-
-    $result=$conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            array_push($fInfoArr, $row);
-        }
-    } else {
-        echo '0 results';
-    }
-
-    $conn->close();
+    //$sql = "SELECT * FROM `featuredinfo` WHERE `attribute`= 'banner'";
+    $sql ="SELECT * FROM featuredinfo WHERE attribute=?";
+    
+    $fInfoArr=queryShopDB_PDO($sql, 'banner');
+    
     return $fInfoArr;
 }
 
 function getTodayFeaturedInfo()
 {
-    $conn= connectShopDB(); //included in loadHeader.php
-    $fInfoArr= array();
-
-    $sql = "SELECT * FROM `featuredinfo` WHERE `attribute`= 'today'";
-
-    $result=$conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            array_push($fInfoArr, $row);
-        }
-    } else {
-        echo '0 results';
-    }
-
-    $conn->close();
+    $sql ="SELECT * FROM featuredinfo WHERE attribute=?";
+    $fInfoArr=queryShopDB_PDO($sql, 'today');
+    
     return $fInfoArr;
 }
