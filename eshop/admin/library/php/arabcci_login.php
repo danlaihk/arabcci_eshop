@@ -6,18 +6,31 @@ use PDO;
 
 class AdminCheck_DBInfo
 {
-    private $_servername = "localhost";
-    private $_dbUsername = "userCheck";
-    private $_password = "tUNeskkqapN55Bg3";
-    private $_dbname = "admin_user_login";
-    private $_clientUserName;
-   
-    public function __construct($clientUserName)
-    {
-        $this->_clientUserName=$clientUserName;
-    }
+    private $_servername ;
+    private $_dbUsername;
+    private $_password;
+    private $_dbname;
+    private $_dbCode;
+  
     
-    public function queryUserDB_PDO()
+    public function __construct($code)
+    {
+        $this->_dbCode=$code;
+        
+        if ($this->_dbCode=='ashop_userCheck') {
+            $this->_servername = "localhost";
+            $this->_dbUsername = "userCheck";
+            $this->_password = "check";
+            $this->_dbname = "admin_user_login";
+        }
+        if ($this->_dbCode=='ashop') {
+            $this->_servername = "localhost";
+            $this->_dbUsername = "shop";
+            $this->_password = "hYCIkdc2RDghvxAH";
+            $this->_dbname = "arabcci_shop";
+        }
+    }
+    public function queryDB_PDO($sql, $value)
     {
         $servername = $this->_servername;
         $dbname   = $this->_dbname;
@@ -26,16 +39,25 @@ class AdminCheck_DBInfo
 
         try {
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbUserName, $password);
-            $sql ="SELECT * FROM `authentication` WHERE userName=?";
+        
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            //echo "Connected successfully";
+            //echo "Connected successfully"; //debug
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$this->_clientUserName]);
-
-            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if ($value==null) {
+                // if no parameterized value
+                $stmt->execute();
+            } elseif (is_array($value)) {
+                //for IN query and parameterized array value
+                $stmt->execute($value);
+            } else {
+                //for parameterized value
+                $stmt->execute([$value]);
+            }
+            $result= $stmt->fetchAll(\PDO::FETCH_ASSOC);
+           
             //close connection
             $conn=null;
             //return result array
@@ -44,16 +66,46 @@ class AdminCheck_DBInfo
             echo "Error: " . $e->getMessage();
         }
     }
-    public function getUserPW()
+   
+    public function alterDB_PDO($sql, $value)
     {
-        //use PDO class
-        $result = $this->queryUserDB_PDO();
-        if (count($result)>0) {
-            foreach ($result as $row) {
-                echo $row."<br/>";
+        $servername = $this->_servername;
+        $dbname   = $this->_dbname;
+        $dbUserName = $this->_dbUsername;
+        $password = $this->_password;
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbUserName, $password);
+        
+
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            //echo "Connected successfully"; //debug
+            $stmt = $conn->prepare($sql);
+            if ($value==null) {
+                // if no parameterized value
+                $stmt->execute();
+            } elseif (is_array($value)) {
+                //for IN query and parameterized array value
+                $stmt->execute($value);
+            } else {
+                //for parameterized value
+                $stmt->execute([$value]);
             }
-        } else {
-            echo 'sorry not record';
+        
+            //$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $result=$stmt->rowCount();
+            //close connection
+            $conn=null;
+            //return result array
+            if ($result>0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 }
@@ -132,11 +184,12 @@ class EncryptionSession
     private $_arabcci_key;
     private $_cipher;
     private $_iv;
-
+    private $_userName;
     //user info
 
     public function __construct()
     {
+        
         //encritption method parameter
         $this->_keyLength=16;
         $this->_arabcci_key= openssl_random_pseudo_bytes($this->_keyLength, $keyStrong);
@@ -147,20 +200,64 @@ class EncryptionSession
     {
         //may need to change
 
-        $encryptedInfo=openssl_encrypt($info, $this->_cipher, $this->_arabcci_key, 0, $this->_iv);
-        return $encryptedInfo;
+        $encryptedText=openssl_encrypt($info, $this->_cipher, $this->_arabcci_key, 0, $this->_iv);
+        
+        
+        return $encryptedText;
     }
-    private function decryptedInfo($encryptedInfo)
+    public function decryptedInfo($encryptedText, $key, $iv)
     {
         //may need to change
-        $decryptedInfo = openssl_decrypt($encryptedInfo, $this->_cipher, $this->_arabcci_key, 0, $this->_iv);
-        return $decryptedInfo;
+        $decryptedText = openssl_decrypt($encryptedText, $this->_cipher, $key, 0, $iv);
+        return $decryptedText;
     }
-    public function getEncryptedInfo()
+    public function getEncryptedInfo($userName)
     {
-        $info="password correct";
-        $encryptInfo=$this->encryptedInfo($info);
-        return $encryptInfo;
+        do {
+            //random generate a token
+            $token = openssl_random_pseudo_bytes(8, $keyStrong);
+
+            //search any duplicate token in token table
+            $sql="SELECT * FROM token WHERE tokenValue = ?";
+            $adminCheck = new AdminCheck_DBInfo('ashop_userCheck', $this->_userName);
+            $result =$adminCheck->queryDB_PDO($sql, $token);
+        } while ($result);  //while there is duplicate, re-generate and search again
+        
+        //then check if there any token exist for the userName
+      
+        $sqlToken="SELECT * FROM token WHERE userName = ?";
+        $adminCheck = new AdminCheck_DBInfo('ashop_userCheck', $userName);
+        $userNameResult =$adminCheck->queryDB_PDO($sqlToken, $userName);
+        //debug
+
+        
+        //get current time
+        $currentTime=date("Y-m-d H:i:s");
+        $insertArr=array($userName,$token,$currentTime);
+        //if no , insert
+
+        if ($userNameResult) {
+            //if yes,update
+            $updateArr=array($token,$this->_arabcci_key,$this->_iv ,$currentTime,$userName);
+
+
+            $sqlUpdate="UPDATE token SET tokenValue = ?,tokenKey = ?,tokenIV = ? ,createTime = ? WHERE userName =?";
+            $changeTokenConn = new AdminCheck_DBInfo('ashop_userCheck', $userName);
+            $changeResult= $changeTokenConn->alterDB_PDO($sqlUpdate, $updateArr);
+        } else {
+            $insertArr=array($userName,$token,$this->_arabcci_key,$this->_iv,$currentTime);
+            //if no , insert
+
+            $sqlInsert="INSERT INTO token (userName, tokenValue, tokenKey, tokenIV, createTime) VALUES (?, ?, ?, ?, ?)";
+            $changeTokenConn = new AdminCheck_DBInfo('ashop_userCheck', $userName);
+            $changeResult= $changeTokenConn->alterDB_PDO($sqlInsert, $insertArr);
+        }
+        
+        //encrypted it and return the variable
+        if ($changeResult===true) {
+            $encryptInfo=$this->encryptedInfo($token);
+            return $encryptInfo;
+        }
     }
 }
 //hashing class

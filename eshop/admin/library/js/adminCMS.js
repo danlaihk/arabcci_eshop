@@ -1,15 +1,18 @@
 function loadDocSetting() {
     //click event of login button
     $("#btnLogin").click(function (e) {
+        let admin;
         let userName = $("#username").val();
         let password = $("#password").val();
         //handle null input
 
-        let user = new adminUser(userName, password)
+        admin = new adminSession(userName, password)
         e.preventDefault();
         //debug
-        user.authenticateUser();
+        admin.authenticateUser(userName, password);
 
+        //alert(resultData["userName"] + resultData["token"]);
+        //admin.loadCmsPage(token);
         //send ajax query 
 
 
