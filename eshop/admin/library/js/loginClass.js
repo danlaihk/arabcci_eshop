@@ -1,12 +1,14 @@
-class adminUser {
+class adminSession {
     constructor(userName, password) {
         this._userName = userName;
         this._password = password;
         this._token = $('meta[name="csrf-token"]').attr('content');
     }
 
-    authenticateUser() {
 
+    authenticateUser(userName, password) {
+
+        var token = this._token;
         $.ajax({
             type: 'POST',
 
@@ -15,23 +17,20 @@ class adminUser {
 
             data: {
                 //query '?list='+listStr
-                userName: this._userName,
-                password: this._password,
-                token: this._token,
+                userName: userName,
+                password: password,
+                token: token,
             },
 
             success: function (data) {
-                let result;
-                //echo what the server sent back...
-                //result = JSON.parse(data);
-                //console.log(result);
-                if (data == "false") {
-                    alert("Wrong login information!");
+                var returnObj = JSON.parse(data);
+                // alert(returnObj["correct"] + returnObj["userName"] + returnObj["token"]);
+                if (returnObj["correct"] == false) {
+                    alert('wrong login info!!');
                 }
-                else {
-                    // loadCmsPage(data);
+                if (returnObj["correct"] == true) {
 
-                    $("body").html(data);
+                    window.location.replace('layouts/cPanel.php');
                 }
 
 
@@ -40,26 +39,28 @@ class adminUser {
 
         });
     }
-    loadCmsPage(encryptToken) {
-        //load the cms page with encrypted token
-        $.ajax({
-            type: 'POST',
-            //url: 'layouts/shop_checkout.php?list=' + listSTr,
-            url: "",// to the cms index page at layout
 
 
-            data: {
-                //query '?list='+listStr
-                userName: this._userName,
-                password: this._password,
-                token: encryptToken,
-            },
+}
+function loadCMSIndex(name, returnToken) {
+    var userName = name;
+    var token = returnToken;
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url: 'layouts/cPanel.php',
 
-            success: function (data) {
-                $("body").html(data);
-            }
+        data: {
 
-        });
-    }
+            userName: userName,
+            token: token
 
+        },
+
+        success: function (response) {
+            $("body").html(response);
+            $("body").removeClass("loginBody");
+        }
+
+    });
 }

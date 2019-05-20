@@ -36,15 +36,16 @@ if (empty($_SESSION['csrf_token'])) {
 
     <!-- Custom styles for this template -->
     <link href="library/css/signin.css" rel="stylesheet">
-
+    
 
     <!-- Custom javascript for this template -->
     <script src="library/js/loginClass.js"></script>
     <script src="library/js/adminCMS.js"></script>
 
+
 </head>
 
-<body>
+<body class="loginBody">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div id="content" class="col-12">

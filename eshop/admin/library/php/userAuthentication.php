@@ -13,35 +13,36 @@ use Arabcci_Chamber_Login\EncryptionSession;
 //handle null query
 
 //get http request header
+session_start();
 
+    if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||isset($_SERVER['HTTP_REFERER'])==false||isset($_REQUEST['token'])==false) {
+        echo 'wrong http query';
+        die();
+    }
 
-if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||isset($_SERVER['HTTP_REFERER'])==false||isset($_REQUEST['token'])==false) {
-    echo 'wrong http query';
-    exit();
-} else {
-    
     //run coding
-   
+
     //declare login info object
     $loginInfo=new LoginInfo($_REQUEST['userName'], $_REQUEST['password'], $_SERVER['HTTP_REFERER'], $_REQUEST['token']);
 
     //checking call type
-    
+
     if ($loginInfo->checkCallType()==false) {
         exit();
     }
-    
+
     //checking source url
-    //bug
 
 
+    
     if ($loginInfo->checkHTTP_Referer()==false) {
+        echo $_SERVER['HTTP_REFERER'];
         exit();
     }
+    
 
-    
     $loginInfo->tokenCheck();
-    
+
     //checking token
 
 
@@ -55,9 +56,12 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||i
     //select *blablabla
     
     //create connection object
-    $connInfo=new AdminCheck_DBInfo($_REQUEST['userName']);
+    $connInfo=new AdminCheck_DBInfo('ashop_userCheck', $_REQUEST['userName']);
     //get info
-    $result=$connInfo->queryUserDB_PDO();
+    $sql ="SELECT * FROM `authentication` WHERE userName=?";
+    $result=$connInfo->queryDB_PDO($sql, $_REQUEST['userName']);
+
+    $jsonObj= new stdClass();
 
     if (count($result)>0) {
         //get result
@@ -65,20 +69,29 @@ if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||i
         $password=$result[0]['password'];// only one result show be shown
     } else {
         //if result=0 handle error
-        echo json_encode(false);
+        $jsonObj->{"correct"}=false;
+ 
+        echo json_encode($jsonObj);
         die();
     }
-    $hashVerify = new VerifyHashSession($password, $_REQUEST['password']);
 
+    $hashVerify = new VerifyHashSession($password, $_REQUEST['password']);
+    
     //check the password
+
     if ($hashVerify->verifyHash()===false) {
-        echo json_encode(false);
+        $jsonObj->{"correct"}=false;
+ 
+        echo json_encode($jsonObj);
     } else {
         $encryptSession = new EncryptionSession();
-        $encryptInfo =$encryptSession->getEncryptedInfo();
+     
+        $encryptInfo =$encryptSession->getEncryptedInfo($_REQUEST['userName']);
+
+        $jsonObj->{"correct"}=true;
         
-        //echo json_encode($encryptInfo);
-        //if pass then redirect to CMS page
-        include_once('../../layouts/cPanel.php');
+        $_SESSION['userName']=$_REQUEST['userName'];
+        $_SESSION['token']=$encryptInfo;
+
+        echo json_encode($jsonObj);
     }
-}
