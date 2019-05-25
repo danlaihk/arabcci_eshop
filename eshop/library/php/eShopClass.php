@@ -241,7 +241,7 @@ class product
         $this->pTotalStock  = $pInfoArr[0]['quantityInStock'];
         $this->pSuggestedPrice  = $pInfoArr[0]['MSRP'];
         $this->pImageURL=$pInfoArr[0]['Image'];
-        $this->pDiscount=$pInfoArr[0]['discount(%)'];
+        $this->pDiscount=$pInfoArr[0]['pdiscount'];
         $this->pBuyPrice=$pInfoArr[0]['buyPrice'];
         $this->pAtt=explode('|', $pInfoArr[0]['attributes']); // an array for storing multiple attributes
         $this->pHitrate=$pInfoArr[0]['hitrate'];

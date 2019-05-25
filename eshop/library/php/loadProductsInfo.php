@@ -26,7 +26,7 @@ function getSQLResult($sql)
 
 function getTrendingDealsInfo()
 {
-    $sql = "SELECT * FROM `products` ORDER BY `discount(%)` ASC LIMIT 4";
+    $sql = "SELECT * FROM `products` ORDER BY `pdiscount` ASC LIMIT 4";
     $infoArr=queryShopDB_PDO($sql, null);
     if (count($infoArr)>0) {
         return $infoArr;
@@ -155,9 +155,9 @@ function printProductRow($arr, $col)
       
             // calculate price after discount
             $price = $arr[$row]['MSRP'];
-            $pAfterDiscount = $price * $arr[$row]['discount(%)']/100;
+            $pAfterDiscount = $price * $arr[$row]['pdiscount']/100;
       
-            if ($arr[$row]['discount(%)']!=100) {
+            if ($arr[$row]['pdiscount']!=100) {
                 echo '<font class="text-secondary pr-1"><del>USD'.$price.'</del></font>';
                 echo '<font class="text-success pr-1">USD'.$pAfterDiscount .'</font>';
             } else {
@@ -236,9 +236,9 @@ function printShopProductsRow($arr, $col, $productCode)
       
                 // calculate price after discount
                 $price = $arr[$row]['MSRP'];
-                $pAfterDiscount = $price * $arr[$row]['discount(%)']/100;
+                $pAfterDiscount = $price * $arr[$row]['pdiscount']/100;
       
-                if ($arr[$row]['discount(%)']!=100) {
+                if ($arr[$row]['pdiscount']!=100) {
                     echo '<font class="text-secondary pr-1"><del>USD'.$price.'</del></font>';
                     echo '<font class="text-success pr-1">USD'.$pAfterDiscount .'</font>';
                 } else {
