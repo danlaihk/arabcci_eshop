@@ -3,6 +3,7 @@
 
 include_once('../library/php/cPanelControl.php');
 
+
 loadCMSIndex();
 
 ?>
@@ -47,7 +48,7 @@ loadCMSIndex();
 
     <!-- Custom javascript for this template -->
     <script src="../library/js/loginClass.js"></script>
-    <script src="../library/js/adminCMS.js"></script>
+
 
     <script src="../library/js/cPanel.js"></script>
 
@@ -58,13 +59,27 @@ $(document).ready(function() {
     //set fix height of side menu
     var winHeight = $(window).height();
     $("#sideMenuContainer").height(winHeight * 0.9);
+
+    $("#btnLogout").click(function() {
+        logoutPanel();
+    });
 });
 </script>
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 bg-dark">
-            <p><span class="text-white h2 float-left">Control Panel</span><span class="text-white float-right">Welcome,
-                    <?php echo $_REQUEST['userName']?> !!</span></p>
+            <p>
+                <span class="text-white h2 float-left">Control Panel</span>
+                <span class="text-white float-right">Welcome,
+                    <?php echo $_SESSION['userName']?> !!<br>
+                    <button id="btnLogout" class="btn btn-sm btn-primary float-right my-2">logout</button>
+                </span>
+
+            </p>
+
+
         </div>
     </div>
 
@@ -76,8 +91,10 @@ $(document).ready(function() {
                 <div id="sideMenuContainer" class="col-12  ">
 
                     <div class="list-group">
+                        <a href="cPanel.php" class="list-group-item border-0 bg-transparent text-white" onclick=""
+                            href="#">index</a>
                         <a class="list-group-item border-0 bg-transparent text-white"
-                            onclick="loadSubCMS('product','<?php echo $_REQUEST['userName'];?>')" href="#">Product</a>
+                            onclick="loadSubCMS('product','<?php echo $_SESSION['userName'];?>')" href="#">Product</a>
 
 
 
@@ -101,6 +118,7 @@ $(document).ready(function() {
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
+                            <th></th>
                             <th>Product Code</th>
                             <th>Name</th>
                             <th>Categories</th>

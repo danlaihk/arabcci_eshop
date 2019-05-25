@@ -20,7 +20,7 @@ class AdminCheck_DBInfo
         if ($this->_dbCode=='ashop_userCheck') {
             $this->_servername = "localhost";
             $this->_dbUsername = "userCheck";
-            $this->_password = "check";
+            $this->_password = "0VZAJvvCOgebjone";
             $this->_dbname = "admin_user_login";
         }
         if ($this->_dbCode=='ashop') {
@@ -30,7 +30,7 @@ class AdminCheck_DBInfo
             $this->_dbname = "arabcci_shop";
         }
     }
-    public function queryDB_PDO($sql, $value)
+    public function queryDB_PDO($sql, $value=null)
     {
         $servername = $this->_servername;
         $dbname   = $this->_dbname;
@@ -160,7 +160,6 @@ class LoginInfo
     }
     public function tokenCheck()
     {
-        session_start();
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }

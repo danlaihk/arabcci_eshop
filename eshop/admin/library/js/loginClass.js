@@ -29,9 +29,8 @@ class adminSession {
                     alert('wrong login info!!');
                 }
                 if (returnObj["correct"] == true) {
-                    //loadCMSIndex(returnObj["userName"], returnObj["token"]);
-                    //return returnObj;
-                    window.location.replace('layouts/cPanel.php?userName=' + returnObj["userName"] + '&token=' + returnObj["token"]);
+
+                    window.location.replace('layouts/cPanel.php');
                 }
 
 

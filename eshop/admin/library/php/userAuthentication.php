@@ -13,7 +13,7 @@ use Arabcci_Chamber_Login\EncryptionSession;
 //handle null query
 
 //get http request header
-
+session_start();
 
     if (isset($_REQUEST['userName'])==false ||isset($_REQUEST['password'])==false||isset($_SERVER['HTTP_REFERER'])==false||isset($_REQUEST['token'])==false) {
         echo 'wrong http query';
@@ -32,14 +32,12 @@ use Arabcci_Chamber_Login\EncryptionSession;
     }
 
     //checking source url
-
-
-    
+    /*
     if ($loginInfo->checkHTTP_Referer()==false) {
         echo $_SERVER['HTTP_REFERER'];
         exit();
     }
-    
+    */
 
     $loginInfo->tokenCheck();
 
@@ -89,8 +87,9 @@ use Arabcci_Chamber_Login\EncryptionSession;
         $encryptInfo =$encryptSession->getEncryptedInfo($_REQUEST['userName']);
 
         $jsonObj->{"correct"}=true;
-        $jsonObj->{"userName"}=$_REQUEST['userName'];
-        $jsonObj->{"token"}=$encryptInfo;
+        
+        $_SESSION['userName']=$_REQUEST['userName'];
+        $_SESSION['token']=$encryptInfo;
 
         echo json_encode($jsonObj);
     }
