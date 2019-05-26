@@ -1,0 +1,180 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #f2f2f2;
+ 
+    
+    
+}
+/*fade in animation*/
+.fade-in {
+    animation: fadeIn 1.0s ease forwards;
+    
+}
+.fade-in12 {
+    animation: fadeIn 1.2s ease forwards;
+    
+}
+.fade-in3 {
+    animation: fadeIn 3s ease forwards;
+    
+}
+
+@keyframes fadeIn{
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+@-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+}
+  
+@-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+}
+  
+@-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+}
+
+
+/*.carousel*/
+.carousel-indicators {
+    bottom: -20px;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: yellow;
+  }
+
+.carousel-indicators .active {
+    
+    background-color: green;
+}
+
+/*popular categories*/
+.card
+{
+    background:#f2f2f2;
+}
+.pCat_li, .pCat_li a
+{
+    border-top:0px solid lightgray;
+    border-left:0px solid lightgray;
+    border-right:0px solid lightgray;
+    border-bottom:1px hidden;
+    
+    border-radius:0px;
+
+    margin-bottom: 1px;
+    color:gray;
+}
+
+.pCat_li:hover, .pCat_li a:hover
+{
+    color: orange;
+}
+
+/*today activities*/
+.todayAct_Car_ind{
+    left: -240px;
+}
+
+.carousel-inner .carousel-item .todayAct_text
+{
+    height:85%;
+   
+}
+
+/*Collection for you*/
+.collectionBtn {
+    opacity: 0.6;
+    transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
+}
+.collectionBtn:hover {
+    opacity: 1.0;
+    transition: opacity .55s ease-in-out;
+    -moz-transition: opacity .55s ease-in-out;
+    -webkit-transition: opacity .55s ease-in-out;
+}​
+.fourth-row-link a
+{
+    color:black;
+}
+.fourth-row-link a:hover
+{
+    color: orange ;
+}
+.fourthRowTitle 
+{
+
+    
+    color:gray;
+}
+
+.fourthRowTitle:hover
+{
+    color: orange;
+}
+
+ .fourthRowIcon
+{
+    color:orange;
+}
+
+
+.card-body
+{
+    height: 35%;
+}
+
+.zoom-in{
+    transition: transform .5s; /* Animation */
+    
+}
+.zoom-in:hover
+{
+   
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+/*product details content*/
+.shop-pathP
+{
+    z-index: 0;
+}
+.social-media-link:hover
+{
+    text-decoration: none;
+}
+
+option .right
+{
+    text-align: right;
+}

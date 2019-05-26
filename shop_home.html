@@ -1,0 +1,1348 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- turn responsive on/off-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="description" content="">
+
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Shop index Sample</title>
+
+    <!-- Jquery -->
+    <script src="library/Jquery_331/jquery-3.3.1.slim.min.js">
+    </script>
+    <!-- Bootstrap core CSS -->
+    <script src="library/popperjs/popper_1.14.7.min.js"></script>
+
+    <script src="library/bootstrap_431/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="library/bootstrap_431/css/bootstrap.min.css">
+
+    <!-- Font Awesome library -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- loading js sdk for sharing social media buttons-->
+    <script src="library/js/shared_btn.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="library/css/index.css" rel="stylesheet">
+    <link href="library/css/navbar.css" rel="stylesheet">
+    <link href="library/css/dropdown.css" rel="stylesheet">
+    <link href="library/css/footer.css" rel="stylesheet">
+
+    <!-- Custom javascript for this template -->
+    <script src="library/js/shop_home.js"></script>
+
+
+</head>
+
+<body>
+
+    <!--header -->
+    <header id="header">
+
+        <!-- nav bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-0">
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bolder" href="shop_home.html">Shop</a>
+
+                <!-- collapse button-->
+                <!--
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsBtn"
+                        aria-controls="navbarsBtn" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    -->
+                <div class="input-group form-inline my-2 my-md-0  col-sm-8">
+
+                    <input class="form-control col-sm-12 rounded-left search_form" type="text"
+                        placeholder="Search for more" aria-label="Search">
+                    <div class="input-group-append bg-light rounded-right">
+
+                        <button class="btn btn-inline-secondary" type="button" id="button-addon2" disabled>
+                            <i class="fas fa-search ""></i>
+                            </button>
+                            
+                    </div>
+                </div>
+    
+                    <!--
+                    <div class=" collapse navbar-collapse" id="navbarsBtn">
+                                -->
+                                <div id="navbarsBtn">
+                                    <ul class="navbar-nav mr-auto">
+
+                                        <!-- mobile size language button-->
+                                        <!--
+                                        <li class="nav-item mb-2 d-inline d-sm-inline d-md-none ">
+    
+                                            <a class="btn btm-sm mobile_nav_btn font-weight-bold " href="#">login </a>
+                                            <a class="btn btm-sm mobile_nav_btn float-right font-weight-bold" href="#">En
+                                            </a>
+                                            <a class="btn btm-sm mobile_nav_btn float-right font-weight-bold" href="#">中
+                                            </a>
+                                        </li>
+                                        -->
+
+
+
+
+                                        <!--window size language button-->
+                                        <!--<li class="nav-item d-none d-md-block">-->
+                                        <li class="nav-item ">
+                                            <a class="btn btm-sm navBtn font_white pt-0 pb-1 px-1 mr-2" href="#">Login
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item d-none d-md-block">
+                                            <a class="btn languageBtn active  py-0 px-1 mr-2 rounded-circle"
+                                                href="shop_home.html">En</a>
+                                        </li>
+
+
+                                        <li class="nav-item d-none d-md-block">
+                                            <a class="btn btm-sm languageBtn  py-0 px-1  rounded-circle" href="#">中</a>
+
+                                        </li>
+
+
+
+                                    </ul>
+
+                                </div>
+                    </div>
+        </nav>
+
+
+
+
+        <!-- dropdown menu-->
+        <div id="dropdown_menu_row" class="row  mt-0 d-none d-md-inline no-gutters ">
+
+            <div class="btn-group col-sm-12 bg-white justify-content-center" role="group">
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0 ">
+                    <button class="btn dropdown_btn btn-block dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0 ">
+                    <button class="btn dropdown_btn btn-block dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0 ">
+                    <button class="btn dropdown_btn btn-block dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0 ">
+                    <button class="btn dropdown_btn btn-block dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0 ">
+                    <button class="btn dropdown_btn btn-block dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0">
+                    <button class="btn dropdown_btn btn-block  dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0">
+                    <button class="btn dropdown_btn btn-block  dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0">
+                    <button class="btn dropdown_btn btn-block  dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0">
+                    <button class="btn dropdown_btn btn-block  dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdownBtn col tenPercentWidth p-0">
+                    <button class="btn dropdown_btn btn-block  dropdown_btn " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <span class="fa-stack fa-2x text-primary">
+                                    <i class="fas fa-heartbeat fa-stack-1x"></i>
+                                    <i class="far fa-circle fa-stack-2x"></i>
+
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-0 pb-0">
+                                <span>sample</span>
+                            </div>
+
+                        </div>
+
+
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 2</a>
+                        <a class="dropdown-item" href="#"
+                            onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">sample 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <div class="container-fluid fade-in3">
+
+            <!-- slider -->
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-sm-12">
+                    <div id="carouselIndicators" class="carousel slide col-sm-12  d-none d-md-block"
+                        data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselIndicators" data-slide-to="0" class="active "></li>
+                            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="#" onclick="loadDoc('layouts/productDetails.html',loadContent,'main')">
+                                    <img src="library/image/20180605032908_72536" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="#" onclick="loadDoc('layouts/productDetails.html',loadContent,'main')">
+                                    <img src="library/image/20180605032908_72536" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <!-- left and right button of carousel-->
+
+                        <!--<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>-->
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- main -->
+
+            <!-- first row-->
+            <div class="row mt-3">
+
+                <!-- Popular Categories-->
+                <div class="col-3  d-none d-md-block">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-10 pb-3">
+                            <p class="font-weight-bold"> Popular Categories</p>
+
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="card col-12 border-0 ">
+                            <div class="card-body pt-0 pl-4 ">
+                                <ul class="list-group pl-0">
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Entertainment
+                                            </a>
+                                        </span>
+                                    </li>
+
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Strength</a>
+                                        </span>
+                                    </li>
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Health Care</a>
+                                        </span>
+                                    </li>
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Luxury</a>
+                                        </span>
+                                    </li>
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Melaka</a>
+                                        </span>
+                                    </li>
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                KL</a>
+                                        </span>
+                                    </li>
+
+                                    <li class="list-group-item pCat_li pl-2">
+                                        <span class=" ml-2 change_icon">
+                                            <a href="#"
+                                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')">
+                                                <i class="fas fa-heart"></i>
+
+                                                Islands</a>
+                                        </span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--window size Today Activities-->
+                <div class="col-9">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 pb-3 pl-2 pr-4 mr-3 d-none d-md-block">
+                            Today's activities
+                            <span class="float-right text-danger">View All</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-sm-12 mt-3 pb-3 pl-0">
+                            <div class="card border-0 bg-white mr-3 d-none d-md-block">
+                                <div class="card-body  pl-0 ">
+                                    <div class="row">
+
+                                        <div id="carousel_mainContent" class="carousel slide col-sm-12 ml-3  "
+                                            data-ride="carousel">
+                                            <div id="carousel_mainContent" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators todayAct_Car_ind">
+                                                    <li data-target="#carousel_mainContent" data-slide-to="0"
+                                                        class="active"></li>
+                                                    <li data-target="#carousel_mainContent" data-slide-to="1"></li>
+
+                                                </ol>
+
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-md-8">
+                                                                <a href="#"
+                                                                    onclick="loadDoc('layouts/productDetails.html',loadContent,'main')"><img
+                                                                        src="library/image/activity_image.jpg"
+                                                                        class="d-block w-100 img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-4">
+
+                                                                <div class="row todayAct_text">
+                                                                    <h5 class="text-dark font-weight-normal h-75">
+                                                                        Sunway: 3D2N Stay in Deluxe Room with Breakfast
+                                                                        +
+                                                                        Sunway
+                                                                        Lagoon 1-Day Pass for 2 People
+
+
+                                                                    </h5>
+                                                                    <h5 class=" font-weight-normal h-25"><span
+                                                                            class="text-secondary"><del>USD1500</del></span>
+                                                                        <span class="text-success pl-3">USD1200</span>
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="row justify-content-center align-bottom">
+
+                                                                    <button class="btn btn-lg btn-primary w-75 mr-2"
+                                                                        onclick="loadDoc('layouts/productDetails.html',loadContent,'main')">View
+                                                                        More!</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="carousel-item">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-md-8">
+                                                                <a href="#"
+                                                                    onclick="loadDoc('layouts/productDetails.html',loadContent,'main')">
+                                                                    <img src="library/image/activity_image2.jpg"
+                                                                        class="d-block w-100 img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="row todayAct_text">
+                                                                    <h5 class="text-dark font-weight-normal h-75">
+                                                                        Sunway: 3D2N Stay in Deluxe Plus Executive Room
+                                                                        +
+                                                                        Sunway Lagoon 1-Day Pass for 2 People
+                                                                    </h5>
+                                                                    <h5 class=" font-weight-normal h-25"><span
+                                                                            class="text-secondary"><del>USD1100</del></span>
+                                                                        <span class="text-success pl-3">USD698</span>
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="row justify-content-center">
+
+                                                                    <button class="btn btn-lg btn-primary w-75 mr-2"
+                                                                        onclick="loadDoc('layouts/productDetails.html',loadContent,'main')">View
+                                                                        More!</button>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- second row Collection for you title-->
+            <div class="row ">
+                <div class="col-12 ">
+                    <span class="float-left pl-4">Collection for you</span>
+
+                    <span class="float-right text-danger pr-3">View All</span>
+                </div>
+            </div>
+
+            <!-- third row Collection for you content-->
+
+            <div class="row mt-3">
+                <div class="col-sm-12 ">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607054936_60905.png"></a>
+                        </div>
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607055649_75766.png"></a>
+                        </div>
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607055605_92161.png"></a>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3 ">
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607055748_84676.png"></a>
+                        </div>
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607055449_82454.png"></a>
+                        </div>
+                        <div class="col-sm-4 mb-3"><a href="#"
+                                onclick="loadDoc('layouts/categoriesList.html', loadContent,'main')"><img
+                                    class="img-fluid collectionBtn" src="library/image/20180607054835_76459.png"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- fourth row nav link -->
+            <div class="row mt-3 mx-3 justify-content-center ">
+                <div class="col-sm-12 bg-white">
+                    <div class="row py-3 justify-content-center">
+
+                        <div class="col-sm-3 fourth-row-link">
+                            <p class="text-center"><a href="#row_TrendingDeals"><i
+                                        class="fab fa-hotjar fourthRowIcon mr-2"></i><span
+                                        class="fourthRowTitle">Trending Deals</span></a></p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="text-center"><a href="#row_BestActivities"><i
+                                        class="fas fa-skiing fourthRowIcon mr-2"></i><span class="fourthRowTitle">Best
+                                        Activities</span></a></p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="text-center"><a href="#row_BestFoods"><i
+                                        class="fas fa-hamburger fourthRowIcon mr-2"></i><span
+                                        class="fourthRowTitle">Best Foods</span></a></p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="text-center"><a href="#row_BestShops"><i
+                                        class="fas fa-shopping-bag fourthRowIcon mr-2"></i><span
+                                        class="fourthRowTitle">Best Shops</span></a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fifth row Trending Deal Title-->
+            <div id="row_TrendingDeals" class="row mt-5">
+                <div class="col">
+                    <p><i class="fab fa-hotjar fourthRowIcon mr-2"></i><span>Trending Deals</span></p>
+                </div>
+            </div>
+
+            <!-- Fifth row Trending Deal Contents-->
+            <div class="row px-3">
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sixth row Best Activities Title-->
+            <div id="row_BestActivities" class="row mt-5">
+                <div class="col">
+                    <p><i class="fab fa-hotjar fourthRowIcon mr-2"></i><span>Best Activities</span></p>
+                </div>
+            </div>
+
+            <!-- Sixth row Best Activities Contents-->
+            <div class="row px-3">
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Seventh row Best Foods Title-->
+            <div id="row_BestFoods" class="row mt-5">
+                <div class="col">
+                    <p><i class="fab fa-hotjar fourthRowIcon mr-2"></i><span>Best Foods</span></p>
+                </div>
+            </div>
+
+            <!-- Seventh row Best Foods Contents-->
+            <div class="row px-3">
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Eighth row Best Shops Activities Title-->
+            <div id="row_BestShops" class="row mt-5">
+                <div class="col">
+                    <p><i class="fab fa-hotjar fourthRowIcon mr-2"></i><span>Best Shops</span></p>
+                </div>
+            </div>
+
+            <!-- Eighth row Best Shops Contents-->
+            <div class="row px-3">
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- col-3 -->
+                <div class="col-sm-3 px-4 ">
+                    <div class="row  px-2">
+                        <div class="col image-container overflow-hidden h-100 w-100 p-0 rounded-top">
+                            <img src="library/image/20180807101647_19165.jpg" class="img-fluid zoom-in row-image m-0 ">
+                        </div>
+
+                    </div>
+
+                    <div class="row  px-2 ">
+                        <div class="col-sm-12 bg-white pb-5 ">
+                            <h6 class="">Weekend Hi-Tea Buffet for 2 People...</h6>
+                        </div>
+                    </div>
+
+                    <div class="row   px-2">
+                        <div class="col-sm-12 bg-white py-2 " style="border-top:1px solid #f2f2f2">
+                            <p>
+                                <font class="text-secondary"><del>USD1100</del></font>
+                                <font class="text-success ">USD698 </font>
+                                <a href="#" class="btn btm-sm btn-primary float-right">View More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+        </div>
+    </main>
+
+    <footer id="footer " class="container-fluid ">
+        <!-- footer nav link-->
+        <div class="row mt-5">
+            <div class="col-md-3 d-flex justify-content-center">
+                <a class="title" href="#">
+                    <h3 class="  font-weight-bold "><span class="align-middle">Shop</span></h3>
+                </a>
+            </div>
+            <div class="col-md-9 ">
+                <ul class="nav text-white px-0 mx-0  d-flex justify-content-start">
+
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link px-2 " href="#">
+                            <h5 class="align-middle pl-2">sample</h5>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- footer information-->
+        <div class="row bg-white justify-content-center px-5 pt-3 pb-3">
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/card_visa.gif">
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/card_mc.gif">
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/wechatPay.jpg">
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/alipay.jpg">
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/payment_options_bitcoin.gif">
+            </div>
+
+            <div class="col-md-1 d-flex justify-content-center align-items-center ">
+
+                <img src="library/image/paymentMethods/unionPay.jpg">
+            </div>
+
+        </div>
+
+        </div>
+        <div class="row bg-white">
+            <div class="col-sm-12 text-center">
+                <p>Copyright © . All rights reserved.</p>
+                <p>tele： email： address：</p>
+
+            </div>
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
