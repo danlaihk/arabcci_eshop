@@ -8,7 +8,7 @@ print_r("\n".$_SERVER['HTTP_REFERER']);
 */
 
 
-loadProductPanel();
+loadVendorPanel();
 
 
 
@@ -19,9 +19,9 @@ loadProductPanel();
 $(document).ready(function() {
     $("btn[type=submit]").click(function() {
 
-        //var formStr = $("#pinsertForm").serialize();
+        //var formStr = $("#submitForm").serialize();
         //alert(formStr);
-        $("#pinsertForm").submit();
+        $("#submitForm").submit();
     });
     $('#selectAction').change(function() {
         if ($('#selectAction').val() == 1) {
@@ -32,17 +32,17 @@ $(document).ready(function() {
         }
 
     });
-    $("#pinsertForm").submit(function(e) {
+    $("#submitForm").submit(function(e) {
         e.preventDefault();
 
-        //$('input[name=action]').val('add');
+
         var formAction = $('input[name=action]').val();
 
         if (formAction == 'form') {
             alert('Please select the type of action.');
         } else {
             var formData = new FormData(this);
-            // var formData = $("#pinsertForm").serialize();
+            // var formData = $("#submitForm").serialize();
             // console.log(formData);
 
             var valid = true;
@@ -53,15 +53,15 @@ $(document).ready(function() {
                 }
             });
 
-            $('#pinsertForm select').each(function() {
-                if ($("#pinsertForm select").val() == 0) {
+            $('#submitForm select').each(function() {
+                if ($("#submitForm select").val() == 0) {
 
                     return valid = false;
                 }
             });
 
-            $('#pinsertForm textarea').each(function() {
-                if (!$("#pinsertForm textarea").val()) {
+            $('#submitForm textarea').each(function() {
+                if (!$("#submitForm textarea").val()) {
 
                     return valid = false;
                 }
@@ -73,7 +73,7 @@ $(document).ready(function() {
                 //run ajax
 
                 $.ajax({
-                    url: 'productCMS.php',
+                    url: 'vendorCMS.php',
                     type: 'post',
                     data: formData,
                     cache: false,
@@ -84,10 +84,10 @@ $(document).ready(function() {
 
                         //alert(returnData);
                         if (data == "duplicate") {
-                            alert('You entered a duplicate product name or product code.');
+                            alert('You entered a duplicate vendor code .');
                         } else if (data == "noResult") {
                             alert(
-                                'There is no such product with the productCode you inputted'
+                                'There is no such product with the vendor you inputted'
                             );
                         } else if (data == 'updateCompleted') {
                             console.log(data);
@@ -122,8 +122,8 @@ $(document).ready(function() {
     <div class="col-12">
         <label>Please choose the action of cms</label>
         <select id="selectAction">
-            <option value="1" selected>Add Product Info</option>
-            <option value="2">Update Product Info</option>
+            <option value="1" selected>Add Vendor Info</option>
+            <option value="2">Update Vendor Info</option>
         </select>
     </div>
 </div>
@@ -131,74 +131,49 @@ $(document).ready(function() {
 <div class='row pt-3'>
     <div class="col-12">
         <p>Please enter the information you want to add/update, all information should not be blank.<br>
-            The product code or name must be UNQIE.<br>
-            The product code CANNOT be modified after added.<br>
-            At update action, the target of update depends on its product code.
+            The vendor code or name must be UNQIE.<br>
+            The vendor code CANNOT be modified after added.<br>
+            At update action, the target of update depends on its vendor code.
         </p>
-        <form id="pinsertForm" method="post">
+        <form id="submitForm" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <input type="hidden" name='action' value='add'>
 
-                    <label for="inputPCode">Product Code</label>
-                    <input type="text" class="form-control" name="inputPCode" placeholder="Product Code">
+                    <label for="inputCode">Vendor Code</label>
+                    <input type="text" class="form-control" name="inputCode" placeholder="Feature Code">
+
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputName">Vendor Name</label>
+                    <input type="text" class="form-control" name="inputName" placeholder="Vendor Name">
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="inputPName">Product Name</label>
-                    <input type="text" class="form-control" name="inputPName" placeholder="Product Name">
-                </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="selectCategories">Categories</label>
-                    <select class="custom-select my-1 mr-sm-2" name="selectCategories">
-                        <option value="0" selected>Select Product Categories</option>
-                        <?php echo printCategoriesOpts();?>
-                    </select>
-                </div>
 
-                <div class="form-group col-md-6">
-                    <label for="selectVendor">Vendor</label>
-                    <select class="custom-select my-1 mr-sm-2" name="selectVendor">
-                        <option value="0" selected>Select Product Vendors</option>
-                        <?php echo printVendorsOpts();?>
-                    </select>
-                </div>
+                <div class="form-group col-md-12">
 
+                    <label for="inputlink">Link</label>
+                    <input type="text" class="form-control" name="inputlink" placeholder="Vendor Link">
+                </div>
 
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputDescript">Description</label>
                     <textarea class="form-control" name="inputDescript" rows="3"></textarea>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputAttrs">Product Attributes(eg:
-                        attribute1-stock|attribute2-stock)</label>
-                    <textarea class="form-control" name="inputAttrs" rows="3"></textarea>
-                </div>
+
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputBuyprice">Buy Price</label>
-                    <input type="text" class="form-control" name="inputBuyprice" placeholder="Product Buy Price">
-                </div>
 
-                <div class="form-group col-md-3">
-                    <label for="inputMSRP">MSRP</label>
-                    <input type="text" class="form-control" name="inputMSRP"
-                        placeholder="Manufacturer's Suggested Retail Price">
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label for="inputDiscount">Discount(%)</label>
-                    <input type="text" class="form-control" name="inputDiscount" placeholder="Discount(%)">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="pImageUpload">Product Image(730px*566px)</label>
-                    <input type="file" accept="image/*" class="form-control-file" name="pImageUpload">
+                <div class="form-group col-md-6">
+                    <label for="vImageUpload">Vendor Image</label>
+                    <input type="file" accept="image/*" class="form-control-file" name="vImageUpload">
                 </div>
             </div>
 
@@ -217,21 +192,15 @@ $(document).ready(function() {
             <thead class="thead-dark">
                 <tr>
                     <th></th>
-                    <th>Product Code</th>
+                    <th>Vendor Code</th>
                     <th>Name</th>
-                    <th>Categories</th>
-                    <th>Vendor</th>
                     <th>Description</th>
-                    <th>Total Stock</th>
-                    <th>Buy price</th>
-                    <th>MSRP</th>
-                    <th>Discount</th>
-                    <th>Attributes</th>
-                    <th>Image</th>
+                    <th>Vendor Link</th>
+                    <th>Image URL</th>
                     <th>Hit Rate</th>
                 </tr>
             </thead>
-            <?php echo printPListHTML();?>
+            <?php echo printVendorListHTML();?>
         </table>
     </div>
 </div>

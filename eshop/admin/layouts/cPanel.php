@@ -93,16 +93,18 @@ $(document).ready(function() {
                     <div class="list-group">
                         <a href="cPanel.php" class="list-group-item border-0 bg-transparent text-white" onclick=""
                             href="#">index</a>
-                        <a class="list-group-item border-0 bg-transparent text-white"
-                            onclick="loadSubCMS('product','<?php echo $_SESSION['userName'];?>')" href="#">Product</a>
+                        <a class="list-group-item border-0 bg-transparent text-white" onclick="loadSubCMS('product')"
+                            href="#">Product</a>
 
 
 
-                        <a class="list-group-item border-0 bg-transparent text-white" onclick="" href="#">Featured</a>
+                        <a class="list-group-item border-0 bg-transparent text-white" onclick="loadSubCMS('feature')"
+                            href="#">Featured</a>
 
 
 
-                        <a class="list-group-item border-0 bg-transparent text-white" onclick="" href="#">Vendor</a>
+                        <a class="list-group-item border-0 bg-transparent text-white" onclick="loadSubCMS('vendor')"
+                            href=" #">Vendor</a>
 
                     </div>
                 </div>
